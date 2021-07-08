@@ -12,29 +12,41 @@
 
 <body style="background-color: #CCEEFF">
 
+<strong class="welcome_user">
+    <?php
+    session_reset();
+    session_start();
+    $_SESSION['error'] = false;
+    $_SESSION['wrong_pass'] = false;
+
+    if (!empty($_SESSION['conn_or_not'])) {
+            echo "Bonjour, ";
+            echo $_SESSION['log_username'];
+        }
+        else
+            echo "Vous n'etes pas connecté";
+    ?>
+</strong>
 
 <img class="logo" src="../img/Garrasi_logo-removebg-preview.png">
 
     <br>
-
     <h3 class="soustitre1">Un site malveillant ? Frauduleux  ? Prévenez-nous pour protéger la communautée !</h3>
-
     <h2>Dites Garrasi !</h2>
 
-    <br>
+<div class="wrap">
+    <br><br><br><br><br><br>
 
-    <div class="wrap">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="Entrez le nom du site (avec la majuscule)" id="goal">
+
+    <form class="search" action="../recup_donnees.php" method="post">
+            <input type="text" class="searchTerm" placeholder="Entrez le nom du site" name="goal">
             <button type="submit" class="searchButton"onclick="javascript:document.location.href='liste.html'">
                 <i class="fa fa-search"></i>
                 Chercher
             </button>
-        </div>
+        </form>
     </div>
-
     <br><br><br><br><br><br>
-
     <div class="soustext">
         <p>Nous listons les commentaires, les avis et notes des sites que vous signalez !<br>Vous pouvez donc à la fois consulter les critiques des sites,
          mais aussi,<br>faire part de vos expériences et de votre avis lors de la rencontre d'un site frauduleux pour prévenir les internautes !</p>
@@ -42,7 +54,17 @@
     <br>
     <div class="menu">
         <p>
-        <a href="login.html">Se connecter</a> | <a href="register.html">S'inscrire</a>
+            <?php
+            if (empty($_SESSION['conn_or_not']))
+            {
+                echo "<html><a href='login.php'>Se connecter</a> | <a href='register.php'>S'inscrire</a></html>";
+            }
+            else
+            {
+                echo "<html><a href='deconnexion.php'>Deconnexion</a></html>";
+            }
+
+            ?>
         </p>
     </div>
 </body>

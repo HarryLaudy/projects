@@ -71,3 +71,8 @@ button:hover {
     background-color: gold;
     color: black;
 }
+
+.welcome_user
+{
+    text-align: right;
+}
